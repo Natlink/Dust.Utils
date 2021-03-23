@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dust.Utils.Core", "Dust.Utils.Core\Dust.Utils.Core.csproj", "{B1739DFA-781A-4090-AAB7-995BB49B366C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dust.Utils.Test", "Dust.Utils.Test\Dust.Utils.Test.csproj", "{DF90DC39-2F2A-4938-90B1-548C5C831E94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1739DFA-781A-4090-AAB7-995BB49B366C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1739DFA-781A-4090-AAB7-995BB49B366C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1739DFA-781A-4090-AAB7-995BB49B366C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1739DFA-781A-4090-AAB7-995BB49B366C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF90DC39-2F2A-4938-90B1-548C5C831E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF90DC39-2F2A-4938-90B1-548C5C831E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF90DC39-2F2A-4938-90B1-548C5C831E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF90DC39-2F2A-4938-90B1-548C5C831E94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1F1B14E-730F-43F0-8D08-F3D1DBFCBCB3}
+	EndGlobalSection
+EndGlobal
