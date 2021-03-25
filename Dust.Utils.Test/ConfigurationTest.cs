@@ -1,6 +1,8 @@
 ﻿using Dust.Utils.Core.Config;
+using Dust.Utils.Core.Logs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,10 @@ namespace Dust.Utils.Test
 
         public void LoadConfigurationTest((string configFile, Type configType) data)
         {
+            DustConfig loaded = ConfigLoader.Load(data.configType, data.configFile, Log);
+            Assert.IsType<SimpleConfigurationTestClass>(loaded);
+            SimpleConfigurationTestClass casted = (SimpleConfigurationTestClass)loaded;
+            Assert.Equal("TEST", casted.Test1);
         }
 
     }
@@ -30,7 +36,7 @@ namespace Dust.Utils.Test
     internal static class DustConfigElements
     {
         public static readonly List<(string configFile, Type configType)> DustConfigTestCase = new List<(string configFile, Type configType)>  {
-            
+            ("SimpleConfigurationTest.xml", typeof(SimpleConfigurationTestClass)),
         };
 
 
@@ -43,6 +49,30 @@ namespace Dust.Utils.Test
                     tmp.Add(new object[] { DustConfigTestCase[i] });
                 return tmp;
             }
+        }
+    }
+
+    [Serializable]
+    public class SimpleConfigurationTestClass : DustConfig
+    {
+        public string Test1;
+        public List<string> Test2;
+
+        public SimpleConfigurationTestClass() : base()
+        {
+            Test1 = "TEST";
+            Test2 = new List<string>() { "test 1", "test 2"};
+        }
+
+        public SimpleConfigurationTestClass(string test1, List<string> test2, DustLoggerConfig loggerConfig) : base(loggerConfig)
+        {
+            Test1 = test1;
+            Test2 = test2;
+        }
+
+        public override string ToString()
+        {
+            return "SimpleConfigurationTest{"+Test1+", "+Test2.ToString()+"}";
         }
     }
 

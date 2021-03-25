@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dust.Utils.Core.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +53,7 @@ namespace Dust.Utils.Core.Logs
 
     }
 
+    [Serializable]
     public class DustLoggerConfig
     {
         public DustLoggerConfig()
@@ -67,9 +69,9 @@ namespace Dust.Utils.Core.Logs
             ShowError = showError;
         }
 
-        public bool ShowDebug { get; set; }
-        public bool ShowInfo { get; set; }
-        public bool ShowWarning { get; set; }
-        public bool ShowError { get; set; }
+        public bool ShowDebug;
+        public bool ShowInfo;
+        public bool ShowWarning;
+        public bool ShowError;
     }
 }

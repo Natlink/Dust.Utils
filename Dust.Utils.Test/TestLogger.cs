@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace Dust.Utils.Test
 {
-    class TestLogger : ILogger
+    public class TestLogger : ILogger
     {
         private ITestOutputHelper Output;
 
