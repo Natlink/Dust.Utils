@@ -22,21 +22,6 @@ namespace Dust.Utils.Test
 
         public void LoadConfigurationTest((string configFile, Type configType) data)
         {
-            Log.Info(data.configType.Name + " " + data.configType);
-            /*
-            try
-            {
-                descriptor = new ModelDescriptor(model.GetType());
-                Log.Log(descriptor.ToString());
-            }
-            catch (Exception e)
-            {
-                Log.Log(e.ToString());
-                Assert.False(true);
-            }
-            Assert.NotEmpty(descriptor.Props);
-            Assert.Equal(model.GetType(), descriptor.ModelType);
-            */
         }
 
     }
