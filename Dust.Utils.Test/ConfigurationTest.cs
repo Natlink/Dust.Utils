@@ -24,7 +24,7 @@ namespace Dust.Utils.Test
 
         public void LoadConfigurationTest((string configFile, Type configType) data)
         {
-            DustConfig loaded = ConfigLoader.Load(data.configType, data.configFile, Log);
+            DustConfig loaded = ConfigLoader.Load(data.configType, new List<System.Reflection.Assembly>(), data.configFile, Log);
             Assert.IsType<SimpleConfigurationTestClass>(loaded);
             SimpleConfigurationTestClass casted = (SimpleConfigurationTestClass)loaded;
             Assert.Equal("TEST", casted.Test1);
@@ -64,7 +64,7 @@ namespace Dust.Utils.Test
             Test2 = new List<string>() { "test 1", "test 2"};
         }
 
-        public SimpleConfigurationTestClass(string test1, List<string> test2, DustLoggerConfig loggerConfig) : base(loggerConfig)
+        public SimpleConfigurationTestClass(string test1, List<string> test2) : base()
         {
             Test1 = test1;
             Test2 = test2;

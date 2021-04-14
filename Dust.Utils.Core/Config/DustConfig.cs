@@ -12,17 +12,11 @@ namespace Dust.Utils.Core.Config
     [Serializable]
     public abstract class DustConfig
     {
-        public DustLoggerConfig Logger;
 
         protected DustConfig()
         {
-            Logger = new DustLoggerConfig();
         }
 
-        protected DustConfig(DustLoggerConfig logger)
-        {
-            Logger = logger;
-        }
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]

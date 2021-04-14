@@ -13,14 +13,14 @@ namespace Dust.Utils.Core.Config
     public static class ConfigLoader
     {
 
-        public static T Load<T>(string configurationFilename, ILogger logs) where T : DustConfig, new()
+        public static T Load<T>(string configurationFilename, List<Assembly> assemblies, ILogger logs) where T : DustConfig, new()
         {
-            return (T)Load(typeof(T), configurationFilename, logs);
+            return (T)Load(typeof(T), assemblies, configurationFilename, logs);
         }
 
-        public static DustConfig Load(Type configurationType, string configurationFilename, ILogger logs, bool forceLoading = false)
+        public static DustConfig Load(Type configurationType, List<Assembly> assemblies, string configurationFilename, ILogger logs, bool forceLoading = false)
         {
-            XmlSerializer serial = new XmlSerializer(configurationType, LoadTypeList().ToArray());
+            XmlSerializer serial = new XmlSerializer(configurationType, LoadTypeList(assemblies).ToArray());
             if (!File.Exists(configurationFilename))
             {
                 return Generate(configurationType, configurationFilename, serial, logs);
@@ -67,14 +67,14 @@ namespace Dust.Utils.Core.Config
             return res;
         }
 
-        static bool Save<T>(string configurationFilename, T data, ILogger logs) where T : DustConfig
+        public static bool Save<T>(string configurationFilename, List<Assembly> assemblies, T data, ILogger logs) where T : DustConfig
         {
-            return Save(typeof(T), configurationFilename, data, logs);
+            return Save(typeof(T), assemblies, configurationFilename, data, logs);
         }
 
-        static bool Save(Type configurationType, string configurationFilename, DustConfig data, ILogger logs)
+        public static bool Save(Type configurationType, List<Assembly> assemblies, string configurationFilename, DustConfig data, ILogger logs)
         {
-            XmlSerializer serial = new XmlSerializer(configurationType, LoadTypeList().ToArray());
+            XmlSerializer serial = new XmlSerializer(configurationType, LoadTypeList(assemblies).ToArray());
             return Save(configurationFilename, serial, data, logs);
         }
         static bool Save(string configurationFilename, XmlSerializer serial, DustConfig data, ILogger logs)
@@ -94,13 +94,18 @@ namespace Dust.Utils.Core.Config
             }
         }
 
-        private static List<Type> LoadTypeList()
+        private static List<Type> LoadTypeList(List<Assembly> assemblies)
         {
             var configsType = new List<Type>();
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
                 foreach (Type type in assembly.GetTypes())
-                    if (type.GetCustomAttributes(typeof(ModuleConfigAttribute), true).Length > 0)
+                    if (type.GetCustomAttributes(typeof(ModuleConfigAttribute), true).Length > 0 && !configsType.Contains(type))
                         configsType.Add(type);
+            foreach (Assembly assembly in assemblies)
+                foreach (Type type in assembly.GetTypes())
+                    if (type.GetCustomAttributes(typeof(ModuleConfigAttribute), true).Length > 0 && !configsType.Contains(type))
+                        configsType.Add(type);
+
             return configsType;
         }
     }

@@ -54,7 +54,7 @@ namespace Dust.Utils.Core.Logs
     }
 
     [Serializable]
-    public class DustLoggerConfig
+    public class DustLoggerConfig : DustConfig
     {
         public DustLoggerConfig()
         {
